@@ -25,7 +25,7 @@ Accept: application/json
 Content-Type: application/json
 Example : /api/v1/user-github-repos-info?username=rubal
 
-## Sample Response Body
+### Sample Response Body
 [
     {
         "repoName": "repo1",
