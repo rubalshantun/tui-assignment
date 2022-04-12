@@ -7,7 +7,6 @@ package com.tui.assignment.model;
  */
 
 
-
 public class UserGitRepo {
 
     private String repoName;
@@ -43,9 +42,6 @@ public class UserGitRepo {
      * POJO class having info of each branch of a Repo . This is inner class since
      * without a parent Repo a branch info won't make sense .
      */
-
-
-
     public class RepoBranchDetail {
 
         private String branchName;

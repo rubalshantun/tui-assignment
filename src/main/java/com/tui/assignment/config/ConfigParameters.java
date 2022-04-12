@@ -37,6 +37,12 @@ public class ConfigParameters {
     @Value("${invalid.response.formats}")
     private  String invalidResponseFormats; //configurable property having csv of all not supported Response Formats
 
+    @Value("${integration.test.invalid.username}")
+    private String integrationTestInvalidUsername;
+
+    @Value("${integration.test.valid.username}")
+    private String integrationTestValidUsername;
+
     public  String getRepoNameField() {
         return repoNameField;
     }
@@ -75,5 +81,13 @@ public class ConfigParameters {
 
     public  String getInvalidResponseFormats() {
         return invalidResponseFormats;
+    }
+
+    public String getIntegrationTestInvalidUsername() {
+        return integrationTestInvalidUsername;
+    }
+
+    public String getIntegrationTestValidUsername() {
+        return integrationTestValidUsername;
     }
 }

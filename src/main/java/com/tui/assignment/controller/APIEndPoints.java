@@ -2,6 +2,7 @@ package com.tui.assignment.controller;
 
 import com.tui.assignment.config.ConfigParameters;
 import com.tui.assignment.exception.IncorrectResponseFormatException;
+import com.tui.assignment.exception.UserDoesNotExitsException;
 import com.tui.assignment.model.UserGitRepo;
 import com.tui.assignment.service.JsonParsingService;
 import org.slf4j.Logger;
@@ -22,7 +23,7 @@ public class APIEndPoints {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    ConfigParameters configParameters;
+    private ConfigParameters configParameters;
 
     @Autowired
     private JsonParsingService jsonParsingService;
@@ -34,6 +35,9 @@ public class APIEndPoints {
         log.info("user-github-repos-info Endpoint called with params username as : " + userName + " and Accept headers as : " + responseFormat);
         if (configParameters.getInvalidResponseFormats().contains(responseFormat)) {
             throw new IncorrectResponseFormatException("Requested Response data format is not acceptable. Supported format is JSON only");
+        }
+        if(userName.trim().length()==0){
+            throw new UserDoesNotExitsException("Given Username doesn't exits on GitHub.");
         }
         return jsonParsingService.fetchAllReposDataForUser(userName);
     }

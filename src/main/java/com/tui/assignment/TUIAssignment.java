@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 public class TUIAssignment {
 
     @Bean
-    public RestTemplate restClientBean() {
+    public RestTemplate createRestClientBean() {
         return new RestTemplate();
     }
 

@@ -11,20 +11,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.ApplicationContext;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -32,18 +25,18 @@ public class TUIAssignmentUnitTests {
 
 
     @Autowired
-    ApplicationContext applicationContext;
+    private ApplicationContext applicationContext;//it is generally used for integration testing but we are using here to load our config params
 
     @Mock
-    RestClient restClient;
+    private RestClient restClient;
 
     @Mock
-    ConfigParameters configParameters;
+    private ConfigParameters configParameters;
 
     @InjectMocks
-    JsonParsingService jsonParsingService;
+    private JsonParsingService jsonParsingService;
 
-    ConfigParameters actualBean;
+    private ConfigParameters actualBean;
 
     @BeforeEach
     public void initConfigParameters() {
@@ -52,7 +45,7 @@ public class TUIAssignmentUnitTests {
 
 
     @Test
-    public void getResponseObjectOnPassingInputJsonToParsingMethod() throws Exception{
+    public void getResponseObjectOnPassingInputJsonToParsingMethod() throws Exception {
         String mockUserReposResponseJsonString = "[\n" +
                 "    {\n" +
                 "        \"id\": 3581279,\n" +
@@ -137,6 +130,7 @@ public class TUIAssignmentUnitTests {
                 "        \"protected\": false\n" +
                 "    }\n" +
                 "]";
+
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode usernameRepoUrlResponse = objectMapper.readTree(mockUserReposResponseJsonString);
         JsonNode rubalRepoBrancheUrlResponse = objectMapper.readTree(rubalRepoBranchesResponseJsonString);
@@ -150,13 +144,16 @@ public class TUIAssignmentUnitTests {
         List<UserGitRepo> responseObjectList = jsonParsingService
                 .fetchAllReposDataForUser("rubal");
         assertEquals(2, responseObjectList.size());
-        assertEquals(2,responseObjectList.get(0).getRepoBranchDetails().length);
-        assertTrue(responseObjectList.get(0).getRepoName()!=null);
-        assertTrue(responseObjectList.get(0).getOwnerLogin()!=null);
-        assertTrue(responseObjectList.get(0).getRepoBranchDetails()[0].getBranchName()!=null);
+        assertEquals(2, responseObjectList.get(0).getRepoBranchDetails().length);
+        assertNotNull(responseObjectList.get(0).getRepoName());
+        assertNotNull(responseObjectList.get(0).getOwnerLogin());
+        assertNotNull(responseObjectList.get(0).getRepoBranchDetails()[0].getBranchName());
+        assertNotNull(responseObjectList.get(0).getRepoBranchDetails()[0].getLastCommitSHA());
+        assertEquals("thulium",responseObjectList.get(0).getRepoBranchDetails()[1].getBranchName());
+        assertEquals("rubal",responseObjectList.get(0).getRepoName());
     }
 
-    private void initMockConfigBean(){
+    private void initMockConfigBean() {
         when(configParameters.getBranchCommitField()).thenReturn(actualBean.getBranchCommitField());
         when(configParameters.getBranchCommitHashField()).thenReturn(actualBean.getBranchCommitHashField());
         when(configParameters.getBranchNameField()).thenReturn(actualBean.getBranchNameField());

@@ -18,7 +18,7 @@ public class RestClient {
 
 
     @Autowired
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
 
 
     public JsonNode getJsonResponseForGivenGetRestAPI(String url) throws RuntimeException {

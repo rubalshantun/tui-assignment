@@ -27,10 +27,10 @@ public class JsonParsingService {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    ConfigParameters configParameters;
+    private ConfigParameters configParameters;
 
     @Autowired
-    RestClient restClient;
+    private RestClient restClient;
 
 
     public List<UserGitRepo> fetchAllReposDataForUser(String userName) {
@@ -41,7 +41,7 @@ public class JsonParsingService {
             log.info("Going to call GitHub API for User Info on given URL : " + fullUrlForRepos);
             JsonNode reposJsonData = restClient.getJsonResponseForGivenGetRestAPI(fullUrlForRepos);
 
-            if (reposJsonData.isArray()) {
+            if (reposJsonData.isArray()) { //all the repos data of a user
                 log.info("Going to Parse JSON Response " + reposJsonData.toPrettyString());
                 gitRepo = new ArrayList<>();
                 for (int i = 0; i < reposJsonData.size(); i++) {//iterate over each repo of the given user
@@ -56,7 +56,7 @@ public class JsonParsingService {
                     String fullUrlForBranches = MessageFormat.format(configParameters.getGitHubRepoBranchesUrl(), userName, userGitRepo.getRepoName());
                     JsonNode branchesData = restClient.getJsonResponseForGivenGetRestAPI(fullUrlForBranches);
                     UserGitRepo.RepoBranchDetail[] repoBranchDetails = null;
-                    if (branchesData.isArray()) {
+                    if (branchesData.isArray()) {// all the branch data of a repo
                         repoBranchDetails = new UserGitRepo.RepoBranchDetail[branchesData.size()];
                         for (int j = 0; j < branchesData.size(); j++) { //iterate over each branch of the enclosing repo
                             UserGitRepo.RepoBranchDetail repoBranchDetail = userGitRepo.new RepoBranchDetail();

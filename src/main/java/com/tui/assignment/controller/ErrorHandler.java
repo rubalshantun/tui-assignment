@@ -1,12 +1,12 @@
 package com.tui.assignment.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tui.assignment.exception.GenericException;
 import com.tui.assignment.exception.IncorrectResponseFormatException;
 import com.tui.assignment.exception.UserDoesNotExitsException;
 import com.tui.assignment.model.ErrorInfo;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 /**
- *  This class contains mapping of all the custom exception to their desired handling to provide
- *  graceful response
+ * This class contains mapping of all the custom exception to their desired handling to provide
+ * graceful response
  */
 
 @ControllerAdvice
@@ -56,8 +56,7 @@ public class ErrorHandler {
     }
 
 
-
-     // this is to handle highly unlikely event of a Runtime Exception in Service Layer class which is not handled above
+    // this is to handle highly unlikely event of a Runtime Exception in Service Layer class which is not handled above
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(GenericException.class)
     public
