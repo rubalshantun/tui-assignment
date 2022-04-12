@@ -1,0 +1,60 @@
+openapi: 3.0.1
+info:
+  title: tui-assignment
+  description: To get all non-forks github repos of given username
+  version: '0.1'
+servers:
+  - url: http://localhost:8080
+paths:
+  /api/v1/user-github-repos-info:
+    get:
+      description: It fethes all the non-forks repos of a given username from github along with all branches of a repo and it's latest commit hash.
+      parameters:
+        - name: username
+          in: query
+          schema:
+            type: string
+          example: rubal
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                '0':
+                  value: >-
+                    [{"repoName":"banana","ownerLogin":"rubal","repoBranchDetails":[{"branchName":"master","lastCommitSHA":"a24b47679a04afe68a4e7856f401ce4cc8ed1399"}]},{"repoName":"rubal","ownerLogin":"rubal","repoBranchDetails":[{"branchName":"develop","lastCommitSHA":"64df875b013cfdfd3472820adbb52d31552791c9"},{"branchName":"lithium","lastCommitSHA":"217832200f17be70e0cd4bf9a0c864ab851ee393"},{"branchName":"master","lastCommitSHA":"aab1968634c9165c4a37f6ca206eb9a5f4751806"},{"branchName":"thulium","lastCommitSHA":"986d20b171362755d315498fd4159c7e049d390f"}]}]
+      '404':
+        description: Username not found
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                status:
+                  type: integer
+            examples:
+              '0':
+                value: >-
+                  {"status":404,"message":"Given Username doesn't exits on
+                  GitHub."}
+        '406':
+          description: Invalid Accept Request Header Value
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: string
+              examples:
+                '0' :
+                  value: >-
+                    { "status": 406, "message": "Requested Response data format is not acceptable.
+                    Supported format is JSON only" }
+      servers:
+        - url: http://localhost:8080
+    servers:
+      - url: http://localhost:8080
