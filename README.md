@@ -15,7 +15,7 @@ Application can be run by following the steps below
 or
         mvn spring-boot:run
 ```
-* Check the stdout or boot_example.log file to make sure no exceptions are thrown
+* Check the stdout or tui.log file to make sure no exceptions are thrown
 
 ## Rest EndPoints
 ```
@@ -58,10 +58,9 @@ or
 ## Info About the API
 
 This project exposes single REST GET Endpoint mentioned above whose behaviour is described below for different scenarios :
-    * For a Valid username it will fetch all the non-fork repos name along with their owner login . In the same response it will fetch all the
-       branches( their name) of a repo and the latest commit SHA with it . Valid JSON Response body is also mentioned above under Sample Response.
-
-    * For a Invalid username i.e. username which doesn't exit the API with return 404 Not Found Response along with a Custom JSON Response.
+ * For a Valid username it will fetch all the non-fork repos name along with their owner login . In the same response it will fetch all the
+   branches( their name) of a repo and the latest commit SHA with it . Valid JSON Response body is also mentioned above under Sample Response.
+ * For a Invalid username i.e. username which doesn't exit the API with return 404 Not Found Response along with a Custom JSON Response.
     ```
         e.g.
         {
@@ -69,7 +68,7 @@ This project exposes single REST GET Endpoint mentioned above whose behaviour is
             "message": "Given Username doesn't exits on GitHub."
         }
     ```
-     * For a Accept Header "application/xml" the API will return 406 Not Acceptable Response along with a Custom JSON Response.
+ * For a Accept Header "application/xml" the API will return 406 Not Acceptable Response along with a Custom JSON Response.
      ```
         e.g.
         {
@@ -79,4 +78,4 @@ This project exposes single REST GET Endpoint mentioned above whose behaviour is
     ```
 
 ## Developer Contact
-    Email - rubalshantun@gmail.com
+  * Email : rubalshantun@gmail.com
