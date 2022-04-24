@@ -39,6 +39,17 @@ public class UserGitRepo {
         this.repoBranchDetails = repoBranchDetails;
     }
 
+    @Override
+    public int hashCode() {
+        return repoName.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        UserGitRepo userGitRepo = (UserGitRepo) obj;
+        return repoName.equals(userGitRepo.getRepoName());
+    }
+
 
     /**
      * POJO class having info of each branch of a Repo . This is inner class since

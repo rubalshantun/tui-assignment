@@ -6,8 +6,8 @@ import com.tui.assignment.config.ConfigParameters;
 import com.tui.assignment.exception.IncorrectResponseFormatException;
 import com.tui.assignment.exception.UserDoesNotExitsException;
 import com.tui.assignment.model.request.RepoBranchInfo;
-import com.tui.assignment.model.response.UserGitRepo;
 import com.tui.assignment.model.request.UserRepoInfo;
+import com.tui.assignment.model.response.UserGitRepo;
 import com.tui.assignment.service.GitAPIsResponseParsingService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -55,6 +55,7 @@ public class TUIAssignmentUnitTests {
 
         when(configParameters.getGitHubReposUrl()).thenReturn("mockRepoURL/{0}");
         when(configParameters.getGitHubRepoBranchesUrl()).thenReturn("mockBranchesURL/{0}/{1}");
+        when(configParameters.getThreadPoolSize()).thenReturn(8);
 
         when(restClient.getAllReposInfoForUser("mockRepoURL/rubal")).thenReturn(userRepoInfoList);
         when(restClient.getRepoBranchesInfo("mockBranchesURL/rubal/mockRepo1")).thenReturn(repoBranchInfoList);
@@ -74,22 +75,22 @@ public class TUIAssignmentUnitTests {
     @Test
     public void invalidResponseFormatRequestHandling() {
         when(configParameters.getInvalidResponseFormats()).thenReturn("application/xml");
-        assertThrows(IncorrectResponseFormatException.class,()->gitAPIsResponseParsingService.validateRequestedResponseFormat("application/xml"));
+        assertThrows(IncorrectResponseFormatException.class, () -> gitAPIsResponseParsingService.validateRequestedResponseFormat("application/xml"));
     }
 
     @Test
     public void validResponseFormatRequest() {
         when(configParameters.getInvalidResponseFormats()).thenReturn("application/xml");
-        assertDoesNotThrow(()->gitAPIsResponseParsingService.validateRequestedResponseFormat("*/*"));
+        assertDoesNotThrow(() -> gitAPIsResponseParsingService.validateRequestedResponseFormat("*/*"));
     }
 
     @Test
     public void incorrectUserName() {
-        assertThrows(UserDoesNotExitsException.class,()->gitAPIsResponseParsingService.validateUserName(" "));
+        assertThrows(UserDoesNotExitsException.class, () -> gitAPIsResponseParsingService.validateUserName(" "));
     }
 
     @Test
     public void correctUserName() {
-        assertDoesNotThrow(()->gitAPIsResponseParsingService.validateUserName("rubal"));
+        assertDoesNotThrow(() -> gitAPIsResponseParsingService.validateUserName("rubal"));
     }
 }
