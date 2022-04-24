@@ -6,28 +6,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConfigParameters {
 
-
-    @Value("${repo.name.field}")
-    private  String repoNameField;
-
-    @Value("${repo.owner.field}")
-    private  String ownerField;
-
-    @Value("${repo.owner.login.field}")
-    private  String ownerLoginField;
-
-    @Value("${repo.fork.field}")
-    private  String repoForkField;
-
-    @Value("${branch.name.field}")
-    private  String branchNameField;
-
-    @Value("${branch.commit.field}")
-    private  String branchCommitField;
-
-    @Value("${branch.commit.hash.field}")
-    private  String branchCommitHashField;
-
     @Value("${github.repos.branches.uri}")
     private  String gitHubRepoBranchesUrl;
 
@@ -43,33 +21,8 @@ public class ConfigParameters {
     @Value("${integration.test.valid.username}")
     private String integrationTestValidUsername;
 
-    public  String getRepoNameField() {
-        return repoNameField;
-    }
-
-    public  String getOwnerField() {
-        return ownerField;
-    }
-
-    public  String getOwnerLoginField() {
-        return ownerLoginField;
-    }
-
-    public  String getRepoForkField() {
-        return repoForkField;
-    }
-
-    public  String getBranchNameField() {
-        return branchNameField;
-    }
-
-    public  String getBranchCommitField() {
-        return branchCommitField;
-    }
-
-    public  String getBranchCommitHashField() {
-        return branchCommitHashField;
-    }
+    @Value("${thread.pool.size}")
+    private int threadPoolSize;
 
     public  String getGitHubRepoBranchesUrl() {
         return gitHubRepoBranchesUrl;
@@ -89,5 +42,9 @@ public class ConfigParameters {
 
     public String getIntegrationTestValidUsername() {
         return integrationTestValidUsername;
+    }
+
+    public int getThreadPoolSize() {
+        return threadPoolSize;
     }
 }

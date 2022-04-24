@@ -1,4 +1,4 @@
-package com.tui.assignment.model;
+package com.tui.assignment.model.response;
 
 
 /**

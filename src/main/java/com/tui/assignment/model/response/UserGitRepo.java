@@ -1,4 +1,6 @@
-package com.tui.assignment.model;
+package com.tui.assignment.model.response;
+
+import java.util.List;
 
 /**
  * POJO Class to hold all the required info to send in response for each repo of a user.
@@ -11,7 +13,7 @@ public class UserGitRepo {
 
     private String repoName;
     private String ownerLogin;
-    private RepoBranchDetail[] repoBranchDetails;
+    private List<RepoBranchDetail> repoBranchDetails;
 
     public String getRepoName() {
         return repoName;
@@ -29,11 +31,11 @@ public class UserGitRepo {
         this.ownerLogin = ownerLogin;
     }
 
-    public RepoBranchDetail[] getRepoBranchDetails() {
+    public List<RepoBranchDetail> getRepoBranchDetails() {
         return repoBranchDetails;
     }
 
-    public void setRepoBranchDetails(RepoBranchDetail[] repoBranchDetails) {
+    public void setRepoBranchDetails(List<RepoBranchDetail> repoBranchDetails) {
         this.repoBranchDetails = repoBranchDetails;
     }
 

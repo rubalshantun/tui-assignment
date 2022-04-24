@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tui.assignment.exception.GenericException;
 import com.tui.assignment.exception.IncorrectResponseFormatException;
 import com.tui.assignment.exception.UserDoesNotExitsException;
-import com.tui.assignment.model.ErrorInfo;
+import com.tui.assignment.model.response.ErrorInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
